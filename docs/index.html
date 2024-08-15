@@ -1,10 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAFU APP</title>
+
 <script>
     // Define the deeplinks
     const deeplinks = {
         battery: "cafuapp://cafu.mobile.com/trigger-service?service=battery",
-        carwash: "cafuapp://cafu.mobile.com/trigger-service?service=car-wash",
-        oilchange: "cafuapp://cafu.mobile.com/trigger-service?service=servicing",
-        tyrechange: "cafuapp://cafu.mobile.com/trigger-service?service=tyre"
+        "car-wash": "cafuapp://cafu.mobile.com/trigger-service?service=car-wash",
+        servicing: "cafuapp://cafu.mobile.com/trigger-service?service=servicing",
+        tyre: "cafuapp://cafu.mobile.com/trigger-service?service=tyre",
+
+// emergency Links
+        emergency_fuel:  "cafuapp://cafu.mobile.com/emergency-services?service=emergency_fuel",
+emergency_battery : "cafuapp://cafu.mobile.com/emergency-services?service=emergency_battery",
+emergency_tyres : "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyres",
+emergency_tyre_pressure : "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyre_pressure",
+emergency_towing: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_towing",
+"vehicle-inspection" : "cafuapp://cafu.mobile.com/trigger-service?service=vehicle-inspection"
     };
 
     // Function to handle the redirect
@@ -27,3 +42,9 @@
     // Execute the redirect function when the page loads
     window.onload = redirectUser;
 </script>
+    </head>
+<body>
+    <h1>Redirecting to the CAFU App...</h1>
+    
+</body>
+</html>
