@@ -55,6 +55,13 @@
                     // Redirect to the corresponding deeplink
                     // window.location.href = deeplinks[service];
                     window.location = deeplinks[service];
+
+
+setTimeout(() => {
+  window.location.replace(deeplinks[service]); 
+}, 500);
+
+                    
                 } else {
                     // If the service does not match or is missing, show an error or redirect to a fallback page
                     console.error('Invalid or missing service parameter');
