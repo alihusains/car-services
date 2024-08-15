@@ -23,21 +23,21 @@ emergency_towing: "cafuapp://cafu.mobile.com/emergency-services?service=emergenc
     };
 
     // Function to handle the redirect
-    function redirectUser() {
-        // Get the query parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const service = urlParams.get('service');
-        const query = window.location.search.replace(`?service=${service}`, '');
+   function redirectUser() {
+            // Get the query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const service = urlParams.get('service');
+            const query = window.location.search.replace(`?service=${service}`, '');
 
-        // Check if the service matches any of the defined services
-        if (deeplinks[service]) {
-            // Redirect to the corresponding deeplink with the remaining query parameters
-            window.location.href = deeplinks[service] + query;
-        } else {
-            // If the service does not match, show an error or handle it appropriately
-            alert('Invalid service');
+            // Check if the service matches any of the defined services
+            if (deeplinks[service]) {
+                // Redirect to the corresponding deeplink with the remaining query parameters
+                window.location.href = deeplinks[service] + query;
+            } else {
+                // If the service does not match, show an error or handle it appropriately
+                alert('Invalid service');
+            }
         }
-    }
 
     // Execute the redirect function when the page loads
     window.onload = redirectUser;
