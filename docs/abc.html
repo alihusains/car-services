@@ -4,40 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service Redirect</title>
+    <!-- Meta tags to prevent caching -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <script>
-        // Define the deeplinks
-        const deeplinks = {
-            "battery": "cafuapp://cafu.mobile.com/trigger-service?service=battery",
-            "car-wash": "cafuapp://cafu.mobile.com/trigger-service?service=car-wash",
-            "servicing": "cafuapp://cafu.mobile.com/trigger-service?service=servicing",
-            "tyre": "cafuapp://cafu.mobile.com/trigger-service?service=tyre",
-            "emergency_fuel": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_fuel",
-            "emergency_battery": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_battery",
-            "emergency_tyres": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyres",
-            "emergency_tyre_pressure": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyre_pressure",
-            "emergency_towing": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_towing",
-            "vehicle-inspection": "cafuapp://cafu.mobile.com/trigger-service?service=vehicle-inspection"
-        };
+        document.addEventListener("DOMContentLoaded", function() {
+            // Define the deeplinks
+            const deeplinks = {
+                "battery": "cafuapp://cafu.mobile.com/trigger-service?service=battery",
+                "car-wash": "cafuapp://cafu.mobile.com/trigger-service?service=car-wash",
+                "servicing": "cafuapp://cafu.mobile.com/trigger-service?service=servicing",
+                "tyre": "cafuapp://cafu.mobile.com/trigger-service?service=tyre",
+                "emergency_fuel": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_fuel",
+                "emergency_battery": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_battery",
+                "emergency_tyres": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyres",
+                "emergency_tyre_pressure": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyre_pressure",
+                "emergency_towing": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_towing",
+                "vehicle-inspection": "cafuapp://cafu.mobile.com/trigger-service?service=vehicle-inspection"
+            };
 
-        // Function to handle the redirect
-        function redirectUser() {
-            // Get the query parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const service = urlParams.get('service');
-            const query = window.location.search.replace(`?service=${service}`, '');
+            // Function to handle the redirect
+            function redirectUser() {
+                // Get the query parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                const service = urlParams.get('service');
 
-            // Check if the service matches any of the defined services
-            if (deeplinks[service]) {
-                // Redirect to the corresponding deeplink with the remaining query parameters
-                window.location.replace(deeplinks[service] + query);
-            } else {
-                // If the service does not match, show an error or handle it appropriately
-                alert('Invalid service');
+                // Check if the service matches any of the defined services
+                if (deeplinks[service]) {
+                    // Redirect to the corresponding deeplink
+                    window.location.assign(deeplinks[service]);
+                } else {
+                    // If the service does not match, show an error
+                    alert('Invalid service');
+                }
             }
-        }
 
-        // Execute the redirect function when the page loads
-        window.onload = redirectUser;
+            // Execute the redirect function when the page loads
+            redirectUser();
+        });
     </script>
 </head>
 <body>
