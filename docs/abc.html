@@ -29,7 +29,7 @@
             // Check if the service matches any of the defined services
             if (deeplinks[service]) {
                 // Redirect to the corresponding deeplink with the remaining query parameters
-                window.location.href = deeplinks[service] + query;
+                window.location.replace(deeplinks[service] + query);
             } else {
                 // If the service does not match, show an error or handle it appropriately
                 alert('Invalid service');
