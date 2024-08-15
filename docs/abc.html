@@ -1,29 +1,47 @@
-<script>
-    // Define the deeplinks
-    const deeplinks = {
-        battery: "cafuapp://cafu.mobile.com/trigger-service?service=battery",
-        carwash: "cafuapp://cafu.mobile.com/trigger-service?service=car-wash",
-        oilchange: "cafuapp://cafu.mobile.com/trigger-service?service=servicing",
-        tyrechange: "cafuapp://cafu.mobile.com/trigger-service?service=tyre"
-    };
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Redirect</title>
+    <script>
+        // Define the deeplinks
+        const deeplinks = {
+            "battery": "cafuapp://cafu.mobile.com/trigger-service?service=battery",
+            "car-wash": "cafuapp://cafu.mobile.com/trigger-service?service=car-wash",
+            "servicing": "cafuapp://cafu.mobile.com/trigger-service?service=servicing",
+            "tyre": "cafuapp://cafu.mobile.com/trigger-service?service=tyre",
+            "emergency_fuel": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_fuel",
+            "emergency_battery": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_battery",
+            "emergency_tyres": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyres",
+            "emergency_tyre_pressure": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyre_pressure",
+            "emergency_towing": "cafuapp://cafu.mobile.com/emergency-services?service=emergency_towing",
+            "vehicle-inspection": "cafuapp://cafu.mobile.com/trigger-service?service=vehicle-inspection"
+        };
 
-    // Function to handle the redirect
-    function redirectUser() {
-        // Get the query parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const service = urlParams.get('service');
-        const query = window.location.search.replace(`?service=${service}`, '');
+        // Function to handle the redirect
+        function redirectUser() {
+            // Get the query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const service = urlParams.get('service');
+            const query = window.location.search.replace(`?service=${service}`, '');
 
-        // Check if the service matches any of the defined services
-        if (deeplinks[service]) {
-            // Redirect to the corresponding deeplink with the remaining query parameters
-            window.location.href = deeplinks[service] + query;
-        } else {
-            // If the service does not match, show an error or handle it appropriately
-            alert('Invalid service');
+            // Check if the service matches any of the defined services
+            if (deeplinks[service]) {
+                // Redirect to the corresponding deeplink with the remaining query parameters
+                window.location.href = deeplinks[service] + query;
+            } else {
+                // If the service does not match, show an error or handle it appropriately
+                alert('Invalid service');
+            }
         }
-    }
 
-    // Execute the redirect function when the page loads
-    window.onload = redirectUser;
-</script>
+        // Execute the redirect function when the page loads
+        window.onload = redirectUser;
+    </script>
+</head>
+<body>
+    <h1>Redirecting...</h1>
+    <p>If you are not redirected automatically, <a href="#" onclick="redirectUser()">click here</a>.</p>
+</body>
+</html>
