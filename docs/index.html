@@ -54,7 +54,7 @@
                 if (service && deeplinks[service]) {
                     // Redirect to the corresponding deeplink
                     // window.location.href = deeplinks[service];
-                    window.open = deeplinks[service];
+                    window.location = deeplinks[service];
                 } else {
                     // If the service does not match or is missing, show an error or redirect to a fallback page
                     console.error('Invalid or missing service parameter');
