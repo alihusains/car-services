@@ -1,36 +1,101 @@
-<script>
-    // Define the deeplinks
-    const deeplinks = {
-        battery: "cafuapp://cafu.mobile.com/trigger-service?service=battery",
-        carwash: "cafuapp://cafu.mobile.com/trigger-service?service=car-wash",
-        oilchange: "cafuapp://cafu.mobile.com/trigger-service?service=servicing",
-        tyrechange: "cafuapp://cafu.mobile.com/trigger-service?service=tyre",
-         emergencyfuel: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_fuel",
-        emergencybattery: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_battery",
-        emergencytyres: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyres",
-        emergencytyrepressure: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyre_pressure",
-        emergencytowing: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_towing",
-        vehicleinspection: "cafuapp://cafu.mobile.com/trigger-service?service=vehicle-inspection"
-    
-    };
-
-    // Function to handle the redirect
-    function redirectUser() {
-        // Get the query parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const service = urlParams.get('service');
-        const query = window.location.search.replace(`?service=${service}`, '');
-
-        // Check if the service matches any of the defined services
-        if (deeplinks[service]) {
-            // Redirect to the corresponding deeplink with the remaining query parameters
-            window.location.href = deeplinks[service] + query;
-        } else {
-            // If the service does not match, show an error or handle it appropriately
-            alert('Invalid service');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
         }
-    }
+        .message {
+            font-size: 1.2em;
+        }
+        .fallback {
+            margin-top: 20px;
+        }
+        .fallback a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .fallback a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Define the deeplinks
+            const deeplinks = {
+                battery: "cafuapp://cafu.mobile.com/trigger-service?service=battery",
+                carwash: "cafuapp://cafu.mobile.com/trigger-service?service=car-wash",
+                oilchange: "cafuapp://cafu.mobile.com/trigger-service?service=servicing",
+                tyrechange: "cafuapp://cafu.mobile.com/trigger-service?service=tyre",
+                emergencyfuel: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_fuel",
+                emergencybattery: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_battery",
+                emergencytyres: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyres",
+                emergencytyrepressure: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyre_pressure",
+                emergencytowing: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_towing",
+                vehicleinspection: "cafuapp://cafu.mobile.com/trigger-service?service=vehicle-inspection"
+            };
 
-    // Execute the redirect function when the page loads
-    window.onload = redirectUser;
-</script>
+            // Function to handle the redirect
+            function redirectUser() {
+                // Get the query parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                const service = urlParams.get('service');
+
+                if (service && deeplinks[service]) {
+                    // Redirect to the corresponding deeplink
+                    window.location.href = deeplinks[service];
+                } else {
+                    // If the service does not match or is missing, show an error or redirect to a fallback page
+                    console.error('Invalid or missing service parameter');
+                    // Optionally, redirect to a fallback page or show a custom message
+                    document.querySelector('.message').innerText = 'Invalid or missing service parameter. If you are not redirected, click the link below.';
+                    document.querySelector('.fallback').style.display = 'block';
+                }
+            }
+
+            // Execute the redirect function when the page loads
+            redirectUser();
+        });
+    </script>
+</head>
+<body>
+    <div class="message">Redirecting you to the CAFU App...</div>
+    <div class="fallback" style="display: none;">
+        <p>If you are not redirected, <a id="fallback-link" href="#">click here</a>.</p>
+    </div>
+    <script>
+        // Set the fallback link to the deep link in case of failure
+        document.getElementById('fallback-link').addEventListener('click', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const service = urlParams.get('service');
+            const deeplinks = {
+                battery: "cafuapp://cafu.mobile.com/trigger-service?service=battery",
+                carwash: "cafuapp://cafu.mobile.com/trigger-service?service=car-wash",
+                oilchange: "cafuapp://cafu.mobile.com/trigger-service?service=servicing",
+                tyrechange: "cafuapp://cafu.mobile.com/trigger-service?service=tyre",
+                emergencyfuel: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_fuel",
+                emergencybattery: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_battery",
+                emergencytyres: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyres",
+                emergencytyrepressure: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_tyre_pressure",
+                emergencytowing: "cafuapp://cafu.mobile.com/emergency-services?service=emergency_towing",
+                vehicleinspection: "cafuapp://cafu.mobile.com/trigger-service?service=vehicle-inspection"
+            };
+            if (service && deeplinks[service]) {
+                window.location.href = deeplinks[service];
+            } else {
+                alert('Error: Unable to redirect.');
+            }
+        });
+    </script>
+</body>
+</html>
